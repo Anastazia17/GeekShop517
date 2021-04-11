@@ -2,17 +2,14 @@ window.onload = function () {
     var _quantity, _price, orderitem_num, delta_quantity, orderitem_quantity, delta_cost;
     var quantity_arr = [];
     var price_arr = [];
-
     var total_forms = parseInt($('input[name=orderitems-TOTAL_FORMS]').val());
     console.log(total_forms);
-
     var order_total_quantity = parseInt($('.order_total_quantity').text()) || 0;
     var order_total_price = parseFloat($('.order_total_cost').text().replace(',', '.')) || 0;
 
     for(var i=0; i < total_forms; i ++){
         _quantity = parseInt($('input[name=orderitems-' + i + '-quantity]').val());
         _price = parseFloat($('.orderitems-' + i + '-price').text().replace(',', '.'));
-
         quantity_arr[i] = _quantity;
         if(_price){
             price_arr[i] = _price;
@@ -22,7 +19,6 @@ window.onload = function () {
         console.log(quantity_arr);
         console.info('QUANTITY_ARR: ', quantity_arr);
         console.log(price_arr);
-
         $('.order_form').on('click', 'input[type=number]', function(){
             var target = event.target;
             orderitem_num = parseInt(target.name.replace('orderitems-', '').replace('-quantity', ''));
@@ -48,15 +44,11 @@ window.onload = function () {
         function orderSummaryUpdate(orderitem_price, delta_quantity){
             delta_cost = orderitem_price * delta_quantity;
             order_total_price = Number((order_total_price + delta_cost).toFixed(2));
-
             order_total_quantity = order_total_quantity + delta_quantity;
-
             $('.order_total_quantity').html(order_total_quantity.toString());
             $('.order_total_cost').html(order_total_price.toString() + ',00');
         }
     }
-
-
 
     function deleteOrderItem(row) {
        var target_name= row[0].querySelector('input[type="number"]').name;
@@ -76,5 +68,4 @@ window.onload = function () {
        var target = event.target;
        console.log(target);
     });
-
 };
