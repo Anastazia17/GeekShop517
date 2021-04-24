@@ -6,3 +6,4 @@ media
 !/geekshop/vk.json
 venv
 Envs
+tmp/
